@@ -9,7 +9,7 @@ public class Lexer {
     }
 
     public java.util.List<String> Tokenize(String str) throws Exception {
-        ArrayList<String> tokens = new ArrayList<>();
+        List tokens = new ArrayList();
 
         for (int i = 0; i < str.length(); i++) {
             String token = "";

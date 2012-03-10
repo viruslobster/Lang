@@ -5,3 +5,5 @@
 *.sym
 *.nblh~
 /build/
+/nbproject/private/
+/dist/
