@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lexer {
+    //private static String[] breakCodes = {"+", "-", "/", "*", ","};
 
     public Lexer() {
     }
@@ -58,6 +59,9 @@ public class Lexer {
                             break;
                         case '/':
                             token = "/";
+                            break;
+                        case ',':
+                            token = ",";
                             break;
 
                         default:
