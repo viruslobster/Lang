@@ -1,10 +1,9 @@
 package mpp;
 
-import java.util.List;
-import ast.Expr;
 import ast.Number;
-import ast.Op;
-import ast.Operators;
+import ast.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Parser {
 
@@ -19,6 +18,24 @@ public class Parser {
 
     public void reset() {
         i = 0;
+    }
+    
+    public Stmt parseStmt(List<String> tokens) throws Exception {
+        Stmt stmt = null;
+        for (; i < tokens.size(); i++) {
+            if(Character.isLetter(tokens.get(i).charAt(0))) {
+                FunctionCall functionCall = new FunctionCall();
+                functionCall.id = tokens.get(i);
+                List<Expr> l = new ArrayList<Expr>();
+                i++;
+                l.add(parseExpr(tokens));
+                functionCall.args = l;
+                stmt = functionCall;
+                
+            }
+        }
+        
+        return stmt;
     }
 
     public Expr parseExpr(List<String> tokens) throws Exception {

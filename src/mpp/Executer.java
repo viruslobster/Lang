@@ -1,13 +1,26 @@
 package mpp;
 
 import ast.Expr;
+import ast.FunctionCall;
 import ast.Number;
 import ast.Op;
+import ast.Stmt;
 
 public class Executer {
 	public Executer() {
 
 	}
+        
+        public void executeStmt(Stmt stmt) {
+            if (stmt instanceof FunctionCall) {
+                FunctionCall functionCall = (FunctionCall) stmt;
+                
+                for(Expr expr : functionCall.args)
+                System.out.println(executeExpr(expr));
+            }
+        }
+        
+        
 
 	public Double executeExpr(Expr expr) {
 		if (expr instanceof Number) {

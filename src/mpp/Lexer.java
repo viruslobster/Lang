@@ -24,6 +24,15 @@ public class Lexer {
                         i++;
                     }
 
+                } else if(Character.isLetter(str.charAt(i))) {
+                    for (int a = i; a < str.length(); a++) {
+                        if (!Character.isLetter(str.charAt(i))) {
+                            i--;
+                            break;
+                        }
+                        token += str.charAt(i);
+                        i++;
+                    }                                        
                 } else {
                     switch (str.charAt(i)) {
                         case '+':

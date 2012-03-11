@@ -1,6 +1,7 @@
 package mpp;
 
 import ast.Expr;
+import ast.Stmt;
 import java.io.Console;
 import java.util.List;
 
@@ -31,16 +32,16 @@ public class Main {
                 break;
             }
             List<String> tokens = lexer.Tokenize(input);
-            Expr expr = parser.parseExpr(tokens);
-            double res = executer.executeExpr(expr);
+           // Stmt stmt = parser.parseStmt(tokens);
+            
             for(String s : tokens) {
-                //System.out.println(s);
+                System.out.println(s);
             }
-            //System.out.println("--------------------");
-            //System.out.println(expr.toString());
-            //System.out.println("--------------------");
-            System.out.println(res);
-            parser.reset();
+            System.out.println("--------------------");
+            //System.out.println(stmt.toString());
+           // System.out.println("--------------------");
+            //executer.executeStmt(stmt);
+            //parser.reset();
         }
 
 
