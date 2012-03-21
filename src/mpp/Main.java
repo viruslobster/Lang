@@ -32,16 +32,16 @@ public class Main {
                 break;
             }
             List<String> tokens = lexer.Tokenize(input);
-           // Stmt stmt = parser.parseStmt(tokens);
+            Stmt stmt = parser.parseStmt(tokens);
             
             for(String s : tokens) {
-                System.out.println(s);
+                //System.out.println(s);
             }
-            System.out.println("--------------------");
+            //System.out.println("--------------------");
             //System.out.println(stmt.toString());
-           // System.out.println("--------------------");
-            //executer.executeStmt(stmt);
-            //parser.reset();
+            //System.out.println("--------------------");
+            executer.executeStmt(stmt);
+            parser.reset();
         }
 
 
