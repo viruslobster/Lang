@@ -19,11 +19,27 @@ public class Parser {
     public void reset() {
         i = 0;
     }
-    
+
+    public Program parseProgram(List<List<String>> tokens) throws Exception {
+        List<Stmt> stmts = new ArrayList<Stmt>();
+        for (List<String> list : tokens) {
+            
+            Stmt s = parseStmt(list);
+            //System.out.println(s.toString());
+            stmts.add(s);
+            
+            reset();
+        }
+        
+        return new Program(stmts);
+    }
+
     public Stmt parseStmt(List<String> tokens) throws Exception {
         Stmt stmt = null;
+        
         for (; i < tokens.size(); i++) {
-            if(Character.isLetter(tokens.get(i).charAt(0))) {
+            
+            if (Character.isLetter(tokens.get(i).charAt(0))) {
                 FunctionCall functionCall = new FunctionCall();
                 functionCall.id = tokens.get(i);
                 List<Expr> l = new ArrayList<Expr>();
@@ -31,10 +47,10 @@ public class Parser {
                 l.add(parseExpr(tokens));
                 functionCall.args = l;
                 stmt = functionCall;
-                
+
             }
         }
-        
+
         return stmt;
     }
 

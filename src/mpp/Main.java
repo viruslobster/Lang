@@ -1,8 +1,12 @@
 package mpp;
 
 import ast.Expr;
+import ast.Program;
 import ast.Stmt;
+import java.io.BufferedReader;
 import java.io.Console;
+import java.io.File;
+import java.io.FileReader;
 import java.util.List;
 
 public class Main {
@@ -12,37 +16,25 @@ public class Main {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-        
-        Lexer lexer = new Lexer();        
+
+        Lexer lexer = new Lexer();
         Parser parser = new Parser();
         Executer executer = new Executer();
+
         
-        Console console = System.console();
-        if (console == null) {
-            System.err.println("unable to obtain console");
-            return;
-        }
+        File file = new File("/home/michael/hello.yo");
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+
+
+
+        List<List<String>> tokens = lexer.Tokenize(reader);
         
+        Program program = parser.parseProgram(tokens);
         
-        String input;
-        while (true) {
-            System.out.print(">>>");
-            input = console.readLine();
-            if ("exit".equals(input)) {
-                break;
-            }
-            List<String> tokens = lexer.Tokenize(input);
-            Stmt stmt = parser.parseStmt(tokens);
-            
-            for(String s : tokens) {
-                //System.out.println(s);
-            }
-            //System.out.println("--------------------");
-            //System.out.println(stmt.toString());
-            //System.out.println("--------------------");
-            executer.executeStmt(stmt);
-            parser.reset();
-        }
+        System.out.println(program.toString());
+      
+
+
 
 
 
