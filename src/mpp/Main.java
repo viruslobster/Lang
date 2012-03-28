@@ -19,7 +19,8 @@ public class Main {
         Parser parser = new Parser();
         Generator generator = new Generator();
 
-        String fileName = args[0];
+        //String fileName = args[0];
+        String fileName = "C:\\Cygwin\\home\\Michael\\Calc\\dist\\main.foo";
         File file = new File(fileName);
         BufferedReader reader = new BufferedReader(new FileReader(file));
 
@@ -27,10 +28,12 @@ public class Main {
 
         List<List<String>> tokens = lexer.Tokenize(reader);
         
-        Program program = parser.parseProgram(tokens);
         
+        System.out.println(tokens.toString());
+        System.out.println("---------------------------");
+        Program program = parser.parseProgram(tokens);
         System.out.println(program.toString());
-        System.out.print("---------------------------");
+        System.out.println("---------------------------");
         String aout = generator.genProgram(program);
         System.out.print(aout);
         

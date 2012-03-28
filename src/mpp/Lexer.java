@@ -42,18 +42,25 @@ public class Lexer {
                             break;
                         case '-':
                             //add a negative
+
                             tokens.add("+");
                             token = "-";
 
+
                             i++;
+
                             for (int a = i; a < str.length(); a++) {
-                                if (!Character.isDigit(str.charAt(i))) {
-                                    i--;
-                                    break;
+                                if (!Character.isWhitespace(str.charAt(i))) {
+                                    if (!Character.isDigit(str.charAt(i))) {
+                                        i--;
+                                        break;
+                                    }
+                                    token += str.charAt(i);
                                 }
-                                token += str.charAt(i);
                                 i++;
                             }
+
+
                             break;
                         case '*':
                             token = "*";
@@ -64,7 +71,24 @@ public class Lexer {
                         case ',':
                             token = ",";
                             break;
+                        case '=':
+                            token = "=";
+                            break;
+                        case '"':
+                            tokens.add("\"");
+                            token = "";
+                            i++;
+                            for (int a = i; a < str.length(); a++) {
 
+                                if (str.charAt(i) == '"') {
+                                    
+                                    break;
+                                }
+                                token += str.charAt(i);
+
+                                i++;
+                            }
+                            break;
                         default:
                             throw new Exception("\"" + str.charAt(i) + "\""
                                     + " not recognized");
@@ -84,7 +108,7 @@ public class Lexer {
 
         while ((str = reader.readLine()) != null) {
             List<String> t = getTokens(str);
-            if(!t.isEmpty()) {
+            if (!t.isEmpty()) {
                 result.add(t);
             }
         }
