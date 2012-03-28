@@ -1,0 +1,31 @@
+Program := <stmt>
+           <stmt>
+           <stmt>...
+
+stmt -> sysfunct
+        declarvar
+        assign
+
+sysfunct := print <expr>
+
+declarvar := var <id>
+
+assign := <id> = <expr>
+
+expr -> number
+        stringliteral
+        binop
+        variable
+
+number := <digit><digit><digit>...
+
+stringliteral := "<char sequence>"
+
+binop := <expr> <operator> <expr>
+
+operator -> +
+            -
+            *
+            /
+
+variable := <id>
