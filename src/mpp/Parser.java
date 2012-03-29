@@ -28,8 +28,6 @@ public class Parser {
         }
     }
 
-    
-
     public void reset() {
         i = 0;
     }
@@ -63,9 +61,18 @@ public class Parser {
                 stmt = functionCall;
             } else if ("var".equals(token)) {
                 i++;
-                DelcareVar declareVar = new DelcareVar();
-                declareVar.id = tokens.get(i);
-                stmt = declareVar;
+                if ((i + 1) < tokens.size() && "=".equals(tokens.get(i + 1))) {
+                    
+                    DeclareAssignVar var = new DeclareAssignVar();
+                    var.id = tokens.get(i);
+                    i += 2;
+                    var.expr = parseExpr(tokens);
+                    stmt = var;
+                } else {
+                    DelcareVar declareVar = new DelcareVar();
+                    declareVar.id = tokens.get(i);
+                    stmt = declareVar;
+                }
                 i++;
             } else {
                 Assign assign = new Assign();

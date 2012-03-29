@@ -108,6 +108,25 @@ public class Generator {
                     throw new Exception("Cannot assign type void!!");
                     
             }
+        } else if(stmt instanceof DeclareAssignVar) {
+            DeclareAssignVar var = (DeclareAssignVar) stmt;
+            vars.add(var.id, varCount, Type.Void);            
+            varCount++;
+            genExpr(code, var.expr);
+            int num = (Integer)vars.getID(var.id);
+            switch(var.expr.returnType) {
+                case Float:
+                    code.add("fstore " + num);
+                    vars.setType(var.id, Type.Float);
+                    break;
+                case String:
+                    code.add("astore " + num);
+                    vars.setType(var.id, Type.String);
+                    break;                    
+                case Void:
+                    throw new Exception("Cannot assign type void!!");
+                    
+            }
         }
        
                 
