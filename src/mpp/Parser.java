@@ -100,6 +100,7 @@ public class Parser {
 
             } else if (isAlphaNumeric(tokens.get(i))) {
                 expr = new GetVar(tokens.get(i));
+                
             } else {
                 if ("+".equals(tokens.get(i))) {
                     i++;
@@ -111,11 +112,28 @@ public class Parser {
 
                 } else if ("*".equals(tokens.get(i))) {
                     i++;
-                    expr = new Op(expr, Operators.miltiply, new Number(Double.parseDouble(tokens.get(i))));
+                    List l = tokens.subList(i, i+1);
+                    
+                    int buf = i;
+                    i = 0;
+                    Expr ex = parseExpr(l);
+                    i = buf;
+                    
+                    
+                    
+                    expr = new Op(expr, Operators.miltiply, ex);
+                    
+                    
 
                 } else if ("/".equals(tokens.get(i))) {
                     i++;
-                    expr = new Op(expr, Operators.divide, new Number(Double.parseDouble(tokens.get(i))));
+                    List l = tokens.subList(i, i+1);
+                    
+                    int buf = i;
+                    i = 0;
+                    Expr ex = parseExpr(l);
+                    i = buf;
+                    expr = new Op(expr, Operators.divide, ex);
 
                 } else {
                     throw new Exception("no match for " + tokens.get(i));
