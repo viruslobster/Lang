@@ -12,7 +12,7 @@ import java.util.List;
  * @author michael
  */
 public class Program {
-    List<Stmt> stmts;
+    public List<Stmt> stmts;
 
     public Program() {
     }
